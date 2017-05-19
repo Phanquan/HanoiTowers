@@ -45,5 +45,33 @@ Move disk 1 from tower2 to tower3  js.js:51:4
 
 Tổng cộng 15 bước
 ```
+## Sử dụng Class trong JSES6 để lập trình OOP giải quyết bài toán Tháp Hà Nội
+#### Chia Bài toán ra 3 Class: 
+* Class Disk,class Tower và Class GameEngine để chạy chương trình.  
+* Class Disk chứa các thuộc tính của Đĩa và phương thức draw để vẽ đĩa  
+```
+class Disk {
+	constructor(nameDisks, d) {
+		this.name = nameDisks
+		this.diameter = d
+	}
+	drawDisk(...) {
+		//code to draw
+	}
+}
+```
+* Class Tower chứa các thuộc tính của Tower và phương thức draw để vẽ tower  
+```
+class Tower {
+	constructor(nameTowers, arrDisk) {
+		this.name = nameTowers //Tên Tháp
+		this.arrDisk = arrDisk //mảng chứa các Đĩa
+	}
+	drawTower(svgInput, attrX1, attrY1, attrX2, attrY2) {
+		//code to draw towers
+	}
+}
+```
+
 ## Animation
 

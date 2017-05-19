@@ -91,7 +91,7 @@ diskArr = [ //Khởi tạo mảng các đĩa
 towerArr = [ //Khởi tạo mảng các tower
 	new Tower('tower1'),
 	new Tower('tower2'),
-	new Tower('tower3'),
+	new Tower('tower3')
 ]
 
 // Khởi tạo intance game của object GameEngine.

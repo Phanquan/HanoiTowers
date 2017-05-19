@@ -62,10 +62,6 @@ class GameEngine {
 	constructor() {
 		//đếm các bước thực hiện bài toán
 		this.count = 0 
-		//Định nghĩa thuộc tính data là mảng chứa các step ở dưới.Ta sẽ tạo animation thông qua data.
-		this.data = [] 
-		//Định nghĩa thuộc tính step là đối tượng, tức các bước di chuyển của đĩa qua các tháp
-		this.step = {} 
 	}
 
 	//Phương thức để giải quyết bài toán tháp hà nội
@@ -73,15 +69,7 @@ class GameEngine {
 		if (n > 0) {
 			this.move(n - 1, a, c, b)
 			console.log(`Move disk ${n} from ${a.name} to ${c.name}`);
-			//Ta định nghĩa các thuộc tính diskToPick,fromTower,toTower cho đối tượng step.
-			this.step = {
-				diskToPick: diskArr[n - 1], //current disk
-				fromTower: a, //fromTower
-				toTower: c //toTower
-			}
-			//Ta sẽ đẩy step vào mảng data sau mỗi lần lặp
-			this.data.push(this.step) 
-			this.count++; //cout the count
+			this.count++; //count the count
 			this.move(n - 1, b, a, c)
 		}
 	}
@@ -101,18 +89,19 @@ diskArr = [
 ]
 
 towerArr = [
-	new Tower('tower1',diskArr),
-	new Tower('tower2',[]),
-	new Tower('tower3',[]),
+	new Tower('tower1'),
+	new Tower('tower2'),
+	new Tower('tower3'),
 ]
 
 let game = new GameEngine()
+console.log(`Truyền vào ${diskArr.length} Đĩa`)
 game.move(diskArr.length, towerArr[0], towerArr[1], towerArr[2],)
 console.log(`Tổng cộng ${game.count} bước`)
 ```
 * Cuối cùng là Kết Quả in ra Console:
 ```
-Truyền vào 4 đĩa
+Truyền vào 4 Đĩa
 
 Move disk 1 from tower1 to tower2  js.js:51:4
 Move disk 2 from tower1 to tower3  js.js:51:4

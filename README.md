@@ -24,8 +24,8 @@ hanoi(3,'src','aux','dest');
 * Chuyển n-1 đĩa từ B sang C cho các đĩa có đường kính nhỏ hơn lần lượt nằm trên đĩa n.  
 * Tiến hành bước 1 và 3, áp dụng lại thuật giải cho n-1.  
 ## Sử dụng Class trong JSES6 để lập trình OOP giải quyết bài toán Tháp Hà Nội
-#### Chia Bài toán ra 3 Class: 
-* Class Disk,class Tower và Class GameEngine để chạy chương trình.  
+#### Bước 1: Giải quyết thuần Logic
+* Chia bài toán ra 3 class: Class Disk,class Tower và Class GameEngine để chạy chương trình.  
 * Class Disk chứa các thuộc tính của Đĩa và phương thức draw để vẽ đĩa:
 ```javascript
 class Disk {

@@ -23,28 +23,6 @@ hanoi(3,'src','aux','dest');
 * Chuyển đĩa n từ cọc A sang cọc C.  
 * Chuyển n-1 đĩa từ B sang C cho các đĩa có đường kính nhỏ hơn lần lượt nằm trên đĩa n.  
 * Tiến hành bước 1 và 3, áp dụng lại thuật giải cho n-1.  
-#### Kết quả in ra Console.log: 
-```
-Truyền vào 4 đĩa
-
-Move disk 1 from tower1 to tower2  js.js:51:4
-Move disk 2 from tower1 to tower3  js.js:51:4
-Move disk 1 from tower2 to tower3  js.js:51:4
-Move disk 3 from tower1 to tower2  js.js:51:4
-Move disk 1 from tower3 to tower1  js.js:51:4
-Move disk 2 from tower3 to tower2  js.js:51:4
-Move disk 1 from tower1 to tower2  js.js:51:4
-Move disk 4 from tower1 to tower3  js.js:51:4
-Move disk 1 from tower2 to tower3  js.js:51:4
-Move disk 2 from tower2 to tower1  js.js:51:4
-Move disk 1 from tower3 to tower1  js.js:51:4
-Move disk 3 from tower2 to tower3  js.js:51:4
-Move disk 1 from tower1 to tower2  js.js:51:4
-Move disk 2 from tower1 to tower3  js.js:51:4
-Move disk 1 from tower2 to tower3  js.js:51:4
-
-Tổng cộng 15 bước
-```
 ## Sử dụng Class trong JSES6 để lập trình OOP giải quyết bài toán Tháp Hà Nội
 #### Chia Bài toán ra 3 Class: 
 * Class Disk,class Tower và Class GameEngine để chạy chương trình.  
@@ -112,6 +90,28 @@ class GameEngine {
 		//phương thức animation
 	}
 }
+```
+* Cuối cùng là Kết Quả in ra Console:
+```
+Truyền vào 4 đĩa
+
+Move disk 1 from tower1 to tower2  js.js:51:4
+Move disk 2 from tower1 to tower3  js.js:51:4
+Move disk 1 from tower2 to tower3  js.js:51:4
+Move disk 3 from tower1 to tower2  js.js:51:4
+Move disk 1 from tower3 to tower1  js.js:51:4
+Move disk 2 from tower3 to tower2  js.js:51:4
+Move disk 1 from tower1 to tower2  js.js:51:4
+Move disk 4 from tower1 to tower3  js.js:51:4
+Move disk 1 from tower2 to tower3  js.js:51:4
+Move disk 2 from tower2 to tower1  js.js:51:4
+Move disk 1 from tower3 to tower1  js.js:51:4
+Move disk 3 from tower2 to tower3  js.js:51:4
+Move disk 1 from tower1 to tower2  js.js:51:4
+Move disk 2 from tower1 to tower3  js.js:51:4
+Move disk 1 from tower2 to tower3  js.js:51:4
+
+Tổng cộng 15 bước
 ```
 ## Animation
 

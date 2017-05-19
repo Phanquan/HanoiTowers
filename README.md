@@ -52,8 +52,12 @@ Tổng cộng 15 bước
 ```javascript
 class Disk {
 	constructor(nameDisks, d) {   //tham số truyền vào
-		this.name = nameDisks //Định nghĩa thuộc tính tên Đĩa cho class Disk
-		this.diameter = d     //Định nghĩa thuộc tính số thứ tự hay bán kính,các đĩa có bán kính lớn hơn thì ở dưới
+	
+		//Định nghĩa thuộc tính tên Đĩa cho class Disk
+		this.name = nameDisks 
+		//Định nghĩa thuộc tính số thứ tự hay bán kính,các đĩa có bán kính lớn hơn thì ở dưới
+		this.diameter = d    
+		
 	}
 	drawDisk(...) {
 		//phương thức vẽ
@@ -64,8 +68,10 @@ class Disk {
 ```javascript
 class Tower {
 	constructor(nameTowers, arrDisk) { //tham số truyền vào
-		this.name = nameTowers //Định nghĩa thuộc tính Tên Tháp
-		this.arrDisk = arrDisk //Định nghĩa thuộc tính mảng chứa các Đĩa
+		//Định nghĩa thuộc tính Tên Tháp
+		this.name = nameTowers 
+		//Định nghĩa thuộc tính mảng chứa các Đĩa
+		this.arrDisk = arrDisk 
 	}
 	drawTower(...) {
 		//phương thức vẽ
@@ -76,9 +82,12 @@ class Tower {
 ```javascript
 class GameEngine {
 	constructor() {
-		this.count = 0 //đếm các bước thực hiện bài toán
-		this.data = [] //Định nghĩa thuộc tính data là mảng chứa các step ở dưới.Ta sẽ tạo animation thông qua data.
-		this.step = {} //Định nghĩa thuộc tính step là đối tượng, tức các bước di chuyển của đĩa qua các tháp
+		//đếm các bước thực hiện bài toán
+		this.count = 0 
+		//Định nghĩa thuộc tính data là mảng chứa các step ở dưới.Ta sẽ tạo animation thông qua data.
+		this.data = [] 
+		//Định nghĩa thuộc tính step là đối tượng, tức các bước di chuyển của đĩa qua các tháp
+		this.step = {} 
 	}
 
 	//Phương thức để giải quyết bài toán tháp hà nội
@@ -86,7 +95,6 @@ class GameEngine {
 		if (n > 0) {
 			this.move(n - 1, a, c, b)
 			console.log(`Move disk ${n} from ${a.name} to ${c.name}`);
-			
 			//Ta định nghĩa các thuộc tính diskToPick,fromTower,toTower cho đối tượng step.
 			this.step = {
 				diskToPick: diskArr[n - 1], //current disk

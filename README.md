@@ -81,22 +81,26 @@ class GameEngine {
 ```
 * Khai báo các Instances (hình mẫu) của Đối tượng Disk,Tower,GameEngine và chạy chương trình:
 ```javascript
-diskArr = [
+diskArr = [ //Khởi tạo mảng các đĩa
 	new Disk('disk1',1),
 	new Disk('disk2',2),
 	new Disk('disk3',3),
 	new Disk('disk4',4)
 ]
 
-towerArr = [
+towerArr = [ //Khởi tạo mảng các tower
 	new Tower('tower1'),
 	new Tower('tower2'),
 	new Tower('tower3'),
 ]
 
+// Khởi tạo intance game của object GameEngine.
 let game = new GameEngine()
 console.log(`Truyền vào ${diskArr.length} Đĩa`)
+
+//Chạy logic đệ quy với tham số diskArr.length là số lượng phần tử trong mảng,tower[0->2] là các tower src,aux,dest
 game.move(diskArr.length, towerArr[0], towerArr[1], towerArr[2],)
+
 console.log(`Tổng cộng ${game.count} bước`)
 ```
 * Cuối cùng là Kết Quả in ra Console:

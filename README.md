@@ -41,7 +41,7 @@ class Disk {
 class Tower {
 	constructor(nameTowers) { //tham số truyền vào
 		//Định nghĩa thuộc tính Tên Tháp
-		this.name = nameTowers 
+		this.name = nameTowers
 	}
 }
 ```
@@ -50,7 +50,7 @@ class Tower {
 class GameEngine {
 	constructor() {
 		//đếm các bước thực hiện bài toán
-		this.count = 0 
+		this.count = 0
 	}
 
 	//Phương thức để giải quyết bài toán tháp hà nội

@@ -1,4 +1,4 @@
-# HanoiTowers
+# Hanoi Towers
 ## Giới Thiệu:
 Sử dụng thư viện d3js để vẽ hình và tạo animation chuyển động cho các đĩa.  
 Sử dụng Lập trình hướng đối tượng (JavaScript ES6) để giải quyết thuật toán của bài toán Tháp Hà Nội.  
@@ -26,7 +26,7 @@ hanoi(3,'src','aux','dest');
 ## Sử dụng Class trong JSES6 để lập trình OOP giải quyết bài toán Tháp Hà Nội
 #### Bước 1: Giải quyết thuần Logic
 * Chia bài toán ra 3 class: Class Disk,class Tower và Class GameEngine để chạy chương trình.  
-* Class Disk chứa các thuộc tính của Đĩa và phương thức draw để vẽ đĩa:
+* Class Disk chứa các thuộc tính của Đĩa:
 ```javascript
 class Disk {
 	constructor(nameDisks, d) {   //tham số truyền vào
@@ -37,22 +37,17 @@ class Disk {
 		this.diameter = d    
 		
 	}
-	drawDisk(...) {
-		//phương thức vẽ
-	}
 }
 ```
-* Class Tower chứa các thuộc tính của Tower và phương thức draw để vẽ tower:
+* Class Tower chứa các thuộc tính của Tower:
 ```javascript
 class Tower {
 	constructor(nameTowers, arrDisk) { //tham số truyền vào
+	
 		//Định nghĩa thuộc tính Tên Tháp
 		this.name = nameTowers 
 		//Định nghĩa thuộc tính mảng chứa các Đĩa
 		this.arrDisk = arrDisk 
-	}
-	drawTower(...) {
-		//phương thức vẽ
 	}
 }
 ```
@@ -72,10 +67,6 @@ class GameEngine {
 			this.count++; //count the count
 			this.move(n - 1, b, a, c)
 		}
-	}
-	
-	animateDisk(...) {
-		//phương thức animation
 	}
 }
 ```

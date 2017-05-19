@@ -22,6 +22,28 @@ hanoi(3,'src','aux','dest');
 * Chuyển n-1 đĩa từ cọc A sang B. Chỉ còn đĩa n trên cọc A.  
 * Chuyển đĩa n từ cọc A sang cọc C.  
 * Chuyển n-1 đĩa từ B sang C cho các đĩa có đường kính nhỏ hơn lần lượt nằm trên đĩa n.  
-* Dùng thuật đệ quy để giải quyết bài toán này, tiến hành bước 1 và 3, áp dụng lại thuật giải cho n-1.  
+* Tiến hành bước 1 và 3, áp dụng lại thuật giải cho n-1.  
+#### Kết quả in ra Console.log: 
+```
+Truyền vào 4 đĩa
+
+Move disk 1 from tower1 to tower2  js.js:51:4
+Move disk 2 from tower1 to tower3  js.js:51:4
+Move disk 1 from tower2 to tower3  js.js:51:4
+Move disk 3 from tower1 to tower2  js.js:51:4
+Move disk 1 from tower3 to tower1  js.js:51:4
+Move disk 2 from tower3 to tower2  js.js:51:4
+Move disk 1 from tower1 to tower2  js.js:51:4
+Move disk 4 from tower1 to tower3  js.js:51:4
+Move disk 1 from tower2 to tower3  js.js:51:4
+Move disk 2 from tower2 to tower1  js.js:51:4
+Move disk 1 from tower3 to tower1  js.js:51:4
+Move disk 3 from tower2 to tower3  js.js:51:4
+Move disk 1 from tower1 to tower2  js.js:51:4
+Move disk 2 from tower1 to tower3  js.js:51:4
+Move disk 1 from tower2 to tower3  js.js:51:4
+
+Tổng cộng 15 bước
+```
 ## Animation
 

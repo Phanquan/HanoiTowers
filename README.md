@@ -83,9 +83,9 @@ class GameEngine {
 ```javascript
 diskArr = [
 	new Disk('disk1',1),
-	new Disk('disk1',2),
-	new Disk('disk1',3),
-	new Disk('disk1',4)
+	new Disk('disk2',2),
+	new Disk('disk3',3),
+	new Disk('disk4',4)
 ]
 
 towerArr = [

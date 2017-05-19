@@ -91,6 +91,25 @@ class GameEngine {
 	}
 }
 ```
+* Khai báo các Instances (hình mẫu) của Đối tượng Disk,Tower,GameEngine và chạy chương trình:
+```javascript
+diskArr = [
+	new Disk('disk1',1),
+	new Disk('disk1',2),
+	new Disk('disk1',3),
+	new Disk('disk1',4)
+]
+
+towerArr = [
+	new Tower('tower1',diskArr),
+	new Tower('tower2',[]),
+	new Tower('tower3',[]),
+]
+
+let game = new GameEngine()
+game.move(diskArr.length, towerArr[0], towerArr[1], towerArr[2],)
+console.log(`Tổng cộng ${game.count} bước`)
+```
 * Cuối cùng là Kết Quả in ra Console:
 ```
 Truyền vào 4 đĩa

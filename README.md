@@ -29,12 +29,9 @@ hanoi(3,'src','aux','dest');
 * Class Disk chứa các thuộc tính của Đĩa:
 ```javascript
 class Disk {
-	constructor(nameDisks, d) {   //tham số truyền vào
-	
+	constructor(nameDisks) {   //tham số truyền vào
 		//Định nghĩa thuộc tính tên Đĩa cho class Disk
-		this.name = nameDisks 
-		//Định nghĩa thuộc tính số thứ tự hay bán kính,các đĩa có bán kính lớn hơn thì ở dưới
-		this.diameter = d    
+		this.name = nameDisks  
 		
 	}
 }
@@ -42,12 +39,9 @@ class Disk {
 * Class Tower chứa các thuộc tính của Tower:
 ```javascript
 class Tower {
-	constructor(nameTowers, arrDisk) { //tham số truyền vào
-	
+	constructor(nameTowers) { //tham số truyền vào
 		//Định nghĩa thuộc tính Tên Tháp
 		this.name = nameTowers 
-		//Định nghĩa thuộc tính mảng chứa các Đĩa
-		this.arrDisk = arrDisk 
 	}
 }
 ```
@@ -73,10 +67,10 @@ class GameEngine {
 * Khai báo các Instances (hình mẫu) của Đối tượng Disk,Tower,GameEngine và chạy chương trình:
 ```javascript
 diskArr = [ //Khởi tạo mảng các đĩa
-	new Disk('disk1',1),
-	new Disk('disk2',2),
-	new Disk('disk3',3),
-	new Disk('disk4',4)
+	new Disk('disk1'),
+	new Disk('disk2'),
+	new Disk('disk3'),
+	new Disk('disk4')
 ]
 
 towerArr = [ //Khởi tạo mảng các tower

@@ -40,7 +40,7 @@ class Tower {
 class GameEngine {
 	constructor() {
 		this.count = 0 //to count the moves
-		this.data = [] //main data,the data  includes all the steps needed to complete the game
+		this.data = [] //main data,the data includes all the steps needed to complete the game
 		this.step = {} //steps which describe the movement of the disks
 	}
 

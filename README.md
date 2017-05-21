@@ -333,7 +333,7 @@ class Disk {
 	}
 }
 ```
-	> Khai báo lại instance:
+> Khai báo lại instance:
 ```javascript
 	for (var j = 1; j <= numberOfDisk; j++) {
 		//define a new Disk

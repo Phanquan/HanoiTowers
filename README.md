@@ -193,7 +193,27 @@ console.log(game.data)//log ra thuộc tính data của instance game.
   { diskToPick: Disk { name: 'disk1' },
     fromTower: Tower { name: 'tower2' },
     toTower: Tower { name: 'tower3' } } ]
-
 ```
-## Animation
+* Có thể thấy rằng mỗi phần tử của data sẽ tương ứng với một bước (step dã nêu trên) để thực hiện việc chuyển đĩa,ta sẽ dùng data để mô tả việc nhấc,hạ đĩa qua các tháp.
+#### Bước 3:Draw và Animation
+* Ta sẽ đóng gói các bước vẽ và animation sao cho đĩa sẽ có phương thức vẽ đĩa,tháp sẽ vẽ tháp và GameEngine sẽ làm animation.
+* Khai báo các thuộc tính của svg để vẽ ra thẻ svg:
+```javascript
+const p = { //đây là đối tượng chứa các thuộc tính để vẽ svg
+	svgWidth: 1200,		//chiều rộng của svg
+	svgHieght: 600,		//chiều cao của svg
+	diskHeight: 50,	       	//chiều cao của đĩa
+	disNearestTower: 400,  	//khoảng  cách giữa 2 tower gần nhất
+	disFurthestTower: 800, 	//khoảng cách giữa 2 tower xa nhất
+	towerBuffer: 100,      	//tham số để chia khoảng trắng giữa giữa 2 tower 
+	animationDelay: 3000,  	//=thời gian delay của animation
+	animationDuration: 1000	//=thời gian chuyển động của animation
+};
+
+const svg = d3.select('body') 			//chọn thẻ body
+		.append('svg') 			//tạo thêm thẻ svg
+		.attr('width',p.svgWidth) 	//với thuộc tính width
+		.attr('height',p.svgHieght) 	//với thuộc tính height
+```
+
 

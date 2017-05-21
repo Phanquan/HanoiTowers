@@ -195,7 +195,7 @@ console.log(game.data)//log ra thuộc tính data của instance game.
     toTower: Tower { name: 'tower3' } } ]
 ```
 * Có thể thấy rằng mỗi phần tử của data sẽ tương ứng với một bước (step dã nêu trên) để thực hiện việc chuyển đĩa,ta sẽ dùng data để mô tả việc nhấc,hạ đĩa qua các tháp.
-### Bước 3:Draw và Animation
+### Bước 3: Draw và Animation
 * Ta sẽ đóng gói các bước vẽ và animation sao cho đĩa sẽ có phương thức vẽ đĩa,tháp sẽ vẽ tháp và GameEngine sẽ làm animation.
 * Khai báo các thuộc tính của svg để vẽ ra thẻ svg:
 ```javascript
@@ -214,6 +214,10 @@ const svg = d3.select('body') 			//chọn thẻ body
 		.append('svg') 			//tạo thêm thẻ svg
 		.attr('width',p.svgWidth) 	//với thuộc tính width
 		.attr('height',p.svgHieght) 	//với thuộc tính height
+```
+* Thêm phương thức vẽ đĩa,tháp:  
+```javascript
+
 ```
 * Ta sẽ viết lại cách khai báo Instances ở trên:
 ```javascript

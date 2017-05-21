@@ -216,8 +216,43 @@ const svg = d3.select('body') 			//chọn thẻ body
 		.attr('height',p.svgHieght) 	//với thuộc tính height
 ```
 * Thêm phương thức vẽ đĩa,tháp:  
+	>Disk
 ```javascript
-
+class Disk {
+	constructor(nameDisks,d) {   //tham số truyền vào
+		//Định nghĩa thuộc tính tên Đĩa cho class Disk
+		this.name = nameDisks
+		this.diameter = this.d  //STT		
+	}
+	drawDisk(svgInput, attrX, attrY, attrWidth, attrHeight, attrClass){//tham số
+		svgInput.append('rect')
+			.attr('x', attrX)
+			.attr('y', attrY)
+			.attr('width', attrWidth)
+			.attr('height', attrHeight)
+			.attr('class', attrClass)
+	}
+}
+```
+	>Tower
+```javascript
+class Tower {
+	constructor(nameTowers,arrOfDisk) { //tham số truyền vào
+		//Định nghĩa thuộc tính Tên Tháp
+		this.name = nameTowers
+		this.arrOfDisk = arrOfDisk
+	}
+	drawTower(svgInput, attrX1, attrY1, attrX2, attrY2) { //tham số
+		//sử dụng inser thay cho append để tạo thẻ line cho tower ko đè lên disk
+		svgInput.insert('line', ':first-child')
+			.attr('x1', attrX1)
+			.attr('y1', attrY1)
+			.attr('x2', attrX2)
+			.attr('y2', attrY2)
+			.attr('stroke-width', 10)
+			.attr('stroke', 'black');
+	}
+}
 ```
 * Ta sẽ viết lại cách khai báo Instances ở trên:
 ```javascript

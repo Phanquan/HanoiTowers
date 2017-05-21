@@ -195,7 +195,7 @@ console.log(game.data)//log ra thuộc tính data của instance game.
     toTower: Tower { name: 'tower3' } } ]
 ```
 * Có thể thấy rằng mỗi phần tử của data sẽ tương ứng với một bước (step dã nêu trên) để thực hiện việc chuyển đĩa,ta sẽ dùng data để mô tả việc nhấc,hạ đĩa qua các tháp.
-### Bước 3: Draw và Animation
+### Bước 3: Draw
 * Ta sẽ đóng gói các bước vẽ và animation sao cho đĩa sẽ có phương thức vẽ đĩa,tháp sẽ vẽ tháp và GameEngine sẽ làm animation.
 * Khai báo các thuộc tính của svg để vẽ ra thẻ svg:
 ```javascript
@@ -299,8 +299,57 @@ p.towerBuffer = 100 //reset lại buffer
 d3.selectAll('.color').style('fill', function() {
 	return `hsl( ${Math.random() * 360}  ,100%,50%)`
 });
+
+// Khởi tạo intance game của object GameEngine.
+let game = new GameEngine()
+console.log(`Truyền vào ${diskArr.length} Đĩa`)
+
+//Chạy logic đệ quy với tham số diskArr.length là số lượng phần tử trong mảng,tower[0->2] là các tower src,aux,dest
+game.move(diskArr.length, towerArr[0], towerArr[1], towerArr[2])
+
+console.log(`Tổng cộng ${game.count} bước`)
+
+console.log(game.data)
 ```
 * Kết quả với numberOfDisk = 3:
-<img src="http://imgur.com/YwvSjpI">
+http://imgur.com/YwvSjpI
 * Kết quả với numberOfDisk = 4:
-<img src="http://imgur.com/qTrDPmF">
+http://imgur.com/qTrDPmF
+
+### Bước 4: Animation
+* Trước khi tạo phương thức animation cho GameEngine,ta thêm 1 số thuộc tính cho Disk để gán tọa độ,chiều rộng,cao cho class đó:
+	> Disk:
+```javascript
+class Disk {
+	constructor(...) {
+		// Các thuộc tính
+	}
+	drawDisk(svgInput, attrX, attrY, attrWidth, attrHeight, attrClass, x_, y_, height) {
+		// svg đã vẽ
+		
+		this.x_ = x_ 		//tọa độ x của đĩa
+		this.y_ = y_ 		//tọa độ y của đĩa
+		this.height = height 	//chiều cao của đĩa khi ta nhấc lên
+	}
+}
+```
+	> Khai báo lại instance:
+```javascript
+	for (var j = 1; j <= numberOfDisk; j++) {
+		//define a new Disk
+		diskArr.push(new Disk('disk' + j, j))
+
+		//draw the disk that was just defined
+		diskArr[j - 1].drawDisk(
+			svg, 							//svg argument
+			(numberOfDisk- j) * p.diskHeight / 2 + p.diskHeight * 2,//.attr('x',
+			j * p.diskHeight + 2 * p.diskHeight, 			//attr('y',
+			j * p.diskHeight, 					//.attr('width',
+			p.diskHeight, 						//.attr('height',
+			'color disk' + j, 					//.attr('class',
+			0,		 					//this.x_
+			j * p.diskHeight, 					//this.y_
+			j * p.diskHeight + p.diskHeight 			//this.height 
+		)
+	}
+```

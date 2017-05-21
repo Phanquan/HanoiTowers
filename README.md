@@ -148,51 +148,21 @@ class GameEngine {
 ```javascript
 console.log(game.data)//log ra thuộc tính data của instance game.
 
-[ { diskToPick: Disk { name: 'disk1' },
-    fromTower: Tower { name: 'tower1' },
-    toTower: Tower { name: 'tower2' } },
-  { diskToPick: Disk { name: 'disk2' },
-    fromTower: Tower { name: 'tower1' },
-    toTower: Tower { name: 'tower3' } },
-  { diskToPick: Disk { name: 'disk1' },
-    fromTower: Tower { name: 'tower2' },
-    toTower: Tower { name: 'tower3' } },
-  { diskToPick: Disk { name: 'disk3' },
-    fromTower: Tower { name: 'tower1' },
-    toTower: Tower { name: 'tower2' } },
-  { diskToPick: Disk { name: 'disk1' },
-    fromTower: Tower { name: 'tower3' },
-    toTower: Tower { name: 'tower1' } },
-  { diskToPick: Disk { name: 'disk2' },
-    fromTower: Tower { name: 'tower3' },
-    toTower: Tower { name: 'tower2' } },
-  { diskToPick: Disk { name: 'disk1' },
-    fromTower: Tower { name: 'tower1' },
-    toTower: Tower { name: 'tower2' } },
-  { diskToPick: Disk { name: 'disk4' },
-    fromTower: Tower { name: 'tower1' },
-    toTower: Tower { name: 'tower3' } },
-  { diskToPick: Disk { name: 'disk1' },
-    fromTower: Tower { name: 'tower2' },
-    toTower: Tower { name: 'tower3' } },
-  { diskToPick: Disk { name: 'disk2' },
-    fromTower: Tower { name: 'tower2' },
-    toTower: Tower { name: 'tower1' } },
-  { diskToPick: Disk { name: 'disk1' },
-    fromTower: Tower { name: 'tower3' },
-    toTower: Tower { name: 'tower1' } },
-  { diskToPick: Disk { name: 'disk3' },
-    fromTower: Tower { name: 'tower2' },
-    toTower: Tower { name: 'tower3' } },
-  { diskToPick: Disk { name: 'disk1' },
-    fromTower: Tower { name: 'tower1' },
-    toTower: Tower { name: 'tower2' } },
-  { diskToPick: Disk { name: 'disk2' },
-    fromTower: Tower { name: 'tower1' },
-    toTower: Tower { name: 'tower3' } },
-  { diskToPick: Disk { name: 'disk1' },
-    fromTower: Tower { name: 'tower2' },
-    toTower: Tower { name: 'tower3' } } ]
+[ { diskToPick: Disk { name: 'disk1' },    fromTower: Tower { name: 'tower1' },    toTower: Tower { name: 'tower2' } },
+  { diskToPick: Disk { name: 'disk2' },    fromTower: Tower { name: 'tower1' },    toTower: Tower { name: 'tower3' } },
+  { diskToPick: Disk { name: 'disk1' },    fromTower: Tower { name: 'tower2' },    toTower: Tower { name: 'tower3' } },
+  { diskToPick: Disk { name: 'disk3' },    fromTower: Tower { name: 'tower1' },    toTower: Tower { name: 'tower2' } },
+  { diskToPick: Disk { name: 'disk1' },    fromTower: Tower { name: 'tower3' },    toTower: Tower { name: 'tower1' } },
+  { diskToPick: Disk { name: 'disk2' },    fromTower: Tower { name: 'tower3' },    toTower: Tower { name: 'tower2' } },
+  { diskToPick: Disk { name: 'disk1' },    fromTower: Tower { name: 'tower1' },    toTower: Tower { name: 'tower2' } },
+  { diskToPick: Disk { name: 'disk4' },    fromTower: Tower { name: 'tower1' },    toTower: Tower { name: 'tower3' } },
+  { diskToPick: Disk { name: 'disk1' },    fromTower: Tower { name: 'tower2' },    toTower: Tower { name: 'tower3' } },
+  { diskToPick: Disk { name: 'disk2' },    fromTower: Tower { name: 'tower2' },    toTower: Tower { name: 'tower1' } },
+  { diskToPick: Disk { name: 'disk1' },    fromTower: Tower { name: 'tower3' },    toTower: Tower { name: 'tower1' } },
+  { diskToPick: Disk { name: 'disk3' },    fromTower: Tower { name: 'tower2' },    toTower: Tower { name: 'tower3' } },
+  { diskToPick: Disk { name: 'disk1' },    fromTower: Tower { name: 'tower1' },    toTower: Tower { name: 'tower2' } },
+  { diskToPick: Disk { name: 'disk2' },    fromTower: Tower { name: 'tower1' },    toTower: Tower { name: 'tower3' } },
+  { diskToPick: Disk { name: 'disk1' },    fromTower: Tower { name: 'tower2' },    toTower: Tower { name: 'tower3' } } ]
 ```
 * Có thể thấy rằng mỗi phần tử của data sẽ tương ứng với một bước (step dã nêu trên) để thực hiện việc chuyển đĩa,ta sẽ dùng data để mô tả việc nhấc,hạ đĩa qua các tháp.
 ### Bước 3: Draw
@@ -318,7 +288,7 @@ http://imgur.com/qTrDPmF
 
 ### Bước 4: Animation
 * Trước khi tạo phương thức animation cho GameEngine,ta thêm 1 số thuộc tính cho Disk để gán tọa độ,chiều rộng,cao cho class đó:  
-	> Disk:  
+> Disk:  
 ```javascript
 class Disk {
 	constructor(...) {
@@ -333,7 +303,7 @@ class Disk {
 	}
 }
 ```  
-	> Khai báo lại instance:  
+> Khai báo lại instance:  
 ```javascript
 	for (var j = 1; j <= numberOfDisk; j++) {
 		//define a new Disk
@@ -382,7 +352,9 @@ class GameEngine {
 			this.move(n - 1, b, a, c)
 		}
 	}
-	get_distance(tower1, tower2) { //phương thức trả về khoảng cách mà đĩa sẽ đi
+	
+	//phương thức trả về khoảng cách mà đĩa sẽ đi
+	get_distance(tower1, tower2) { 
 		switch (true) {
 			case (tower1 === 'tower1' && tower2 === 'tower2') || (tower1 === 'tower2' && tower2 === 'tower3'):
 				return p.disNearestTower //trả về khoảng cách giữa t1->t2 và t2->t3

@@ -216,7 +216,7 @@ const svg = d3.select('body') 			//chọn thẻ body
 		.attr('height',p.svgHieght) 	//với thuộc tính height
 ```
 * Thêm phương thức vẽ đĩa,tháp:  
-	>Disk
+	>Disk  
 ```javascript
 class Disk {
 	constructor(nameDisks,d) {   //tham số truyền vào
@@ -234,7 +234,7 @@ class Disk {
 	}
 }
 ```
-	> Tower
+	> Tower  
 ```javascript
 class Tower {
 	constructor(nameTowers,arrOfDisk) { //tham số truyền vào

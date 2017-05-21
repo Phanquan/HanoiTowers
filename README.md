@@ -113,7 +113,7 @@ Tổng cộng 15 bước
 #### Bước 2: Thêm biến data cho class GameEngine để lưu lại các bước thực hiện bài toán
 * Thuộc tính data và ý nghĩa:
 	>Thuộc tính data sẽ là mảng gồm các đối tượng,mỗi đối tượng tương ứng một hành động chuyển đĩa từ tower này sang tower khác,nên data sẽ chứa các đối tượng có thuộc tính sau:{disk,fromTower,toTower}.  
-	>ta gọi nó là step (bước thực hiện),sau mỗi lần sử lý logic,ta sẽ 'đẩy' (push) một step vào mảng data.
+	>Ta gọi nó là step (bước thực hiện),sau mỗi lần sử lý logic,ta sẽ 'đẩy' (push) một step vào mảng data.
 ```javascript
 class GameEngine {
 	constructor() {
@@ -143,6 +143,57 @@ class GameEngine {
 		}
 	}
 }
+```
+* Khi console.log data ta sẽ có kết quả như sau:
+```javascript
+console.log(game.data)//log ra thuộc tính data của instance game.
+
+[ { diskToPick: Disk { name: 'disk1' },
+    fromTower: Tower { name: 'tower1' },
+    toTower: Tower { name: 'tower2' } },
+  { diskToPick: Disk { name: 'disk2' },
+    fromTower: Tower { name: 'tower1' },
+    toTower: Tower { name: 'tower3' } },
+  { diskToPick: Disk { name: 'disk1' },
+    fromTower: Tower { name: 'tower2' },
+    toTower: Tower { name: 'tower3' } },
+  { diskToPick: Disk { name: 'disk3' },
+    fromTower: Tower { name: 'tower1' },
+    toTower: Tower { name: 'tower2' } },
+  { diskToPick: Disk { name: 'disk1' },
+    fromTower: Tower { name: 'tower3' },
+    toTower: Tower { name: 'tower1' } },
+  { diskToPick: Disk { name: 'disk2' },
+    fromTower: Tower { name: 'tower3' },
+    toTower: Tower { name: 'tower2' } },
+  { diskToPick: Disk { name: 'disk1' },
+    fromTower: Tower { name: 'tower1' },
+    toTower: Tower { name: 'tower2' } },
+  { diskToPick: Disk { name: 'disk4' },
+    fromTower: Tower { name: 'tower1' },
+    toTower: Tower { name: 'tower3' } },
+  { diskToPick: Disk { name: 'disk1' },
+    fromTower: Tower { name: 'tower2' },
+    toTower: Tower { name: 'tower3' } },
+  { diskToPick: Disk { name: 'disk2' },
+    fromTower: Tower { name: 'tower2' },
+    toTower: Tower { name: 'tower1' } },
+  { diskToPick: Disk { name: 'disk1' },
+    fromTower: Tower { name: 'tower3' },
+    toTower: Tower { name: 'tower1' } },
+  { diskToPick: Disk { name: 'disk3' },
+    fromTower: Tower { name: 'tower2' },
+    toTower: Tower { name: 'tower3' } },
+  { diskToPick: Disk { name: 'disk1' },
+    fromTower: Tower { name: 'tower1' },
+    toTower: Tower { name: 'tower2' } },
+  { diskToPick: Disk { name: 'disk2' },
+    fromTower: Tower { name: 'tower1' },
+    toTower: Tower { name: 'tower3' } },
+  { diskToPick: Disk { name: 'disk1' },
+    fromTower: Tower { name: 'tower2' },
+    toTower: Tower { name: 'tower3' } } ]
+
 ```
 ## Animation
 

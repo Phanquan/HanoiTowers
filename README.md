@@ -24,7 +24,7 @@ hanoi(3,'src','aux','dest');
 * Chuyển n-1 đĩa từ B sang C cho các đĩa có đường kính nhỏ hơn lần lượt nằm trên đĩa n.  
 * Tiến hành bước 1 và 3, áp dụng lại thuật giải cho n-1.  
 ## Sử dụng Class trong JSES6 để lập trình OOP giải quyết bài toán Tháp Hà Nội
-#### Bước 1: Giải quyết thuần Logic thông qua console.log 
+### Bước 1: Giải quyết thuần Logic thông qua console.log 
 * Chia bài toán ra 3 class: Class Disk,class Tower và Class GameEngine để chạy chương trình.  
 * Class Disk chứa các thuộc tính của Đĩa:
 ```javascript
@@ -110,7 +110,7 @@ Move disk 1 from tower2 to tower3  js.js:51:4
 
 Tổng cộng 15 bước
 ```
-#### Bước 2: Thêm biến data cho class GameEngine để lưu lại các bước thực hiện bài toán
+### Bước 2: Thêm biến data cho class GameEngine để lưu lại các bước thực hiện bài toán
 * Thuộc tính data và ý nghĩa:
 	>Thuộc tính data sẽ là mảng gồm các đối tượng,mỗi đối tượng tương ứng một hành động chuyển đĩa từ tower này sang tower khác,nên data sẽ chứa các đối tượng có thuộc tính sau:{disk,fromTower,toTower}.  
 	>Ta gọi nó là step (bước thực hiện),sau mỗi lần sử lý logic,ta sẽ 'đẩy' (push) một step vào mảng data.
@@ -195,7 +195,7 @@ console.log(game.data)//log ra thuộc tính data của instance game.
     toTower: Tower { name: 'tower3' } } ]
 ```
 * Có thể thấy rằng mỗi phần tử của data sẽ tương ứng với một bước (step dã nêu trên) để thực hiện việc chuyển đĩa,ta sẽ dùng data để mô tả việc nhấc,hạ đĩa qua các tháp.
-#### Bước 3:Draw và Animation
+### Bước 3:Draw và Animation
 * Ta sẽ đóng gói các bước vẽ và animation sao cho đĩa sẽ có phương thức vẽ đĩa,tháp sẽ vẽ tháp và GameEngine sẽ làm animation.
 * Khai báo các thuộc tính của svg để vẽ ra thẻ svg:
 ```javascript

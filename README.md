@@ -234,13 +234,14 @@ class Disk {
 	}
 }
 ```
-	>Tower
+	> Tower
 ```javascript
 class Tower {
 	constructor(nameTowers,arrOfDisk) { //tham số truyền vào
 		//Định nghĩa thuộc tính Tên Tháp
 		this.name = nameTowers
-		this.arrOfDisk = arrOfDisk
+		//mảng của tower chứa các disk,khi bắt đầu,tower 1 sẽ chứa n đĩa,các tower còn lại rỗng
+		this.arrOfDisk = arrOfDisk 
 	}
 	drawTower(svgInput, attrX1, attrY1, attrX2, attrY2) { //tham số
 		//sử dụng inser thay cho append để tạo thẻ line cho tower ko đè lên disk
@@ -256,13 +257,52 @@ class Tower {
 ```
 * Ta sẽ viết lại cách khai báo Instances ở trên:
 ```javascript
-let numberOfDisk = 3	//tạm thời khai báo số lượng đĩa = 3.
-const numberOfTower = 3	//khai báo số lượng tháp,luôn bằng 3.
-let diskArr = []	//khai báo mảng chứa đĩa.
-let towerArr = []	//khai báo mảng chứa tháp.
+let numberOfDisk = 3		//tạm thời khai báo số lượng đĩa = 3.
+const numberOfTower = 3		//khai báo số lượng tháp,luôn bằng 3.
+let diskArr = []		//khai báo mảng chứa đĩa.
+let towerArr = []		//khai báo mảng chứa tháp.
 
-for (let i = 1,i <= numberOfDisk,i++){
-	
+for (var j = 1,j <= numberOfDisk,j++){
+	//Định nghĩa một instance của Disk với tham số disk1,2,3 và stt
+	diskArr.push(new Disk('disk' + j, j))
+
+	//sử dụng phương thức drawDisk để vẽ đĩa,diskArr[j-1] nghĩa là phần tử thứ j-1 trong mảng diskArr
+	diskArr[j - 1].drawDisk(
+		svg, 								//svg argument
+		(numberOfDisk - j) * p.diskHeight / 2 + p.diskHeight * 2, 	//.attr('x',
+		j * p.diskHeight + 2 * p.diskHeight, 				//attr('y',
+		j * p.diskHeight, 						//.attr('width',
+		p.diskHeight, 							//.attr('height',
+		'color disk' + j, 						//.attr('class',
+	)
 }
 
+for (var j = 1; j <= numberOfTower; j++) {
+	//define new 3 towers
+	if (j - 1 === 0) {
+		towerArr.push(new Tower('tower' + j, diskArr)) 	// đẩy mảng disk vào tower đầu tiên
+	} else {
+		towerArr.push(new Tower('tower' + j, [])) 	//các tower còn lại ko có gì
+	}
+	//tương tự vẽ đĩa khi vẽ tower 
+	towerArr[j - 1].drawTower(
+		svg, 							//svg argument
+		p.towerBuffer + (numberOfDisk * p.diskHeight) / 2, 	//attr x1
+		120, 							//attr x2
+		p.towerBuffer + (numberOfDisk * p.diskHeight) / 2, 	//attr y1
+		numberOfDisk * p.diskHeight + 150 			//attr y2
+	)
+	p.towerBuffer += 400 //sau mỗi vòng lặp thì tăng khoảng cách giữa các tower lên
+}
+p.towerBuffer = 100 //reset lại buffer
+//đặt màu random cho đĩa
+d3.selectAll('.color').style('fill', function() {
+	return `hsl( ${Math.random() * 360}  ,100%,50%)`
+});
 ```
+* Kết quả với numberOfDisk = 3:
+
+<img>http://imgur.com/YwvSjpI</img>
+* Kết quả với numberOfDisk = 4:
+
+<img>http://imgur.com/qTrDPmF</img>

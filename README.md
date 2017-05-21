@@ -215,5 +215,15 @@ const svg = d3.select('body') 			//chọn thẻ body
 		.attr('width',p.svgWidth) 	//với thuộc tính width
 		.attr('height',p.svgHieght) 	//với thuộc tính height
 ```
+* Ta sẽ viết lại cách khai báo Instances ở trên:
+```javascript
+let numberOfDisk = 3	//tạm thời khai báo số lượng đĩa = 3.
+const numberOfTower = 3	//khai báo số lượng tháp,luôn bằng 3.
+let diskArr = []	//khai báo mảng chứa đĩa.
+let towerArr = []	//khai báo mảng chứa tháp.
 
+for (let i = 1,i <= numberOfDisk,i++){
+	
+}
 
+```

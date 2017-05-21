@@ -84,7 +84,7 @@ let game = new GameEngine()
 console.log(`Truyền vào ${diskArr.length} Đĩa`)
 
 //Chạy logic đệ quy với tham số diskArr.length là số lượng phần tử trong mảng,tower[0->2] là các tower src,aux,dest
-game.move(diskArr.length, towerArr[0], towerArr[1], towerArr[2],)
+game.move(diskArr.length, towerArr[0], towerArr[1], towerArr[2])
 
 console.log(`Tổng cộng ${game.count} bước`)
 ```
@@ -111,6 +111,38 @@ Move disk 1 from tower2 to tower3  js.js:51:4
 Tổng cộng 15 bước
 ```
 #### Bước 2: Thêm biến data cho class GameEngine để lưu lại các bước thực hiện bài toán
+* Thuộc tính data và ý nghĩa:
+	>Thuộc tính data sẽ là mảng gồm các đối tượng,mỗi đối tượng tương ứng một hành động chuyển đĩa từ tower này sang tower khác,nên data sẽ chứa các đối tượng có thuộc tính sau:{disk,fromTower,toTower}.  
+	>ta gọi nó là step (bước thực hiện),sau mỗi lần sử lý logic,ta sẽ 'đẩy' (push) một step vào mảng data.
+```javascript
+class GameEngine {
+	constructor() {
+		//đếm các bước thực hiện bài toán
+		this.count = 0
+		//định nghĩa thuộc tính (property) data dạng mảng
+		this.data = []
+		//định nghĩa thuộc tính step dạng đối tượng
+		this.step = {}
+	}
 
+	//Phương thức để giải quyết bài toán tháp hà nội
+	move(n, a, b, c) {
+		if (n > 0) {
+			this.move(n - 1, a, c, b)
+			console.log(`Move disk ${n} from ${a.name} to ${c.name}`);
+			//tượng tự console.log ở trên,ta gán tham số cho step rồi đẩy vào mảng data
+			this.step = {
+				diskToPick: diskArr[n-1], //đĩa sẽ chọn(n-1 là do diskArr ở dạng mảng)
+				fromTower: a,    //truyền vào tower1
+				toTower: c	//gán cho tower3
+			}
+			// sau khi gán thuộc tính cho step thì đẩy vào data
+			this.data.push(this.step)
+			this.count++; //count the count
+			this.move(n - 1, b, a, c)
+		}
+	}
+}
+```
 ## Animation
 

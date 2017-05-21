@@ -301,6 +301,6 @@ d3.selectAll('.color').style('fill', function() {
 });
 ```
 * Kết quả với numberOfDisk = 3:
-![alt text](http://imgur.com/YwvSjpI)
+<img src="http://imgur.com/YwvSjpI">
 * Kết quả với numberOfDisk = 4:
-![alt text](http://imgur.com/qTrDPmF)
+<img src="http://imgur.com/qTrDPmF">

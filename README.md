@@ -317,8 +317,8 @@ http://imgur.com/YwvSjpI
 http://imgur.com/qTrDPmF
 
 ### Bước 4: Animation
-* Trước khi tạo phương thức animation cho GameEngine,ta thêm 1 số thuộc tính cho Disk để gán tọa độ,chiều rộng,cao cho class đó:
-	> Disk:
+* Trước khi tạo phương thức animation cho GameEngine,ta thêm 1 số thuộc tính cho Disk để gán tọa độ,chiều rộng,cao cho class đó:  
+	> Disk:  
 ```javascript
 class Disk {
 	constructor(...) {
@@ -332,8 +332,8 @@ class Disk {
 		this.height = height 	//chiều cao của đĩa khi ta nhấc lên
 	}
 }
-```
-> Khai báo lại instance:
+```  
+	> Khai báo lại instance:  
 ```javascript
 	for (var j = 1; j <= numberOfDisk; j++) {
 		//define a new Disk
@@ -353,3 +353,110 @@ class Disk {
 		)
 	}
 ```
+* Tạo animation để chuyển đĩa cho class GameEngine:
+```javascript
+class GameEngine {
+	constructor() {
+		//đếm các bước thực hiện bài toán
+		this.count = 0
+			//định nghĩa thuộc tính (property) data dạng mảng
+		this.data = []
+			//định nghĩa thuộc tính step dạng đối tượng
+		this.step = {}
+	}
+
+	//Phương thức để giải quyết bài toán tháp hà nội
+	move(n, a, b, c) {
+		if (n > 0) {
+			this.move(n - 1, a, c, b)
+			console.log(`Move disk ${n} from ${a.name} to ${c.name}`);
+			//tượng tự console.log ở trên,ta gán tham số cho step rồi đẩy vào mảng data
+			this.step = {
+					diskToPick: diskArr[n - 1], //đĩa sẽ chọn(n-1 là do diskArr ở dạng mảng)
+					fromTower: a, //truyền vào tower1
+					toTower: c //gán cho tower3
+				}
+				// sau khi gán thuộc tính cho step thì đẩy vào data
+			this.data.push(this.step)
+			this.count++; //count the count
+			this.move(n - 1, b, a, c)
+		}
+	}
+	get_distance(tower1, tower2) { //phương thức trả về khoảng cách mà đĩa sẽ đi
+		switch (true) {
+			case (tower1 === 'tower1' && tower2 === 'tower2') || (tower1 === 'tower2' && tower2 === 'tower3'):
+				return p.disNearestTower //trả về khoảng cách giữa t1->t2 và t2->t3
+			case (tower1 === 'tower2' && tower2 === 'tower1') || (tower1 === 'tower3' && tower2 === 'tower2'):
+				return -p.disNearestTower //như trên,t3->t2,t2->t1,dấu trừ là đĩa đi ngược
+			case (tower1 === 'tower1' && tower2 === 'tower3'):
+				return p.disFurthestTower //trả về khoảng cách giữa t1 ->t3
+			default:
+				return -p.disFurthestTower //như trên,t3->t1,dấu trừ là đĩa đi ngược
+		}
+	}
+
+	// cập nhật lại đĩa trên các tháp sau khi di chuyển đĩa
+	update_disk(disk, t1, t2) {
+		t1.arrOfDisk.pop() 	//bỏ đối tượng disk cuối cùng trong mảng arrOfDisk trong fromTower
+		t2.arrOfDisk.push(disk) //đẩy disk đó vào mảng arrOfDisk trong toTower 
+	}
+
+	//phương thức animation 
+	animateDisk(diskLength, diskHeight, animationDelay, animationDuration) { //tham số
+		//Sử dụng forEach chạy mảng data,do mảng là 1 đối tượng nên khi dùng 'this' trong forEach,
+		//nó sẽ trỏ về chính mảng đó mà không trỏ về thuộc tính của class,nên ta sẽ dùng /bind(this), 
+		//để sửa lỗi này,có thể tạo biến mới ngoài forEach và gán 'this' cho nó và dử dụng biến đó thay 'this' 
+		//VD: let self = this ---> self.distence = self.get_distence etc...
+		this.data.forEach(function(data, i) {
+				//khai báo thuộc tính mới cho GameEngine
+				
+				//lấy khoảng cách mà đĩa sẽ đi giữa fromTower và toTower
+				this.distenceBetweenTowers = this.get_distance(data.fromTower.name, data.toTower.name)
+				
+				//lấy thuộc tính x_ của đĩa (là tọa độ x bắt đầu)
+				this.begin_x = data.diskToPick.x_ 
+				
+				//lấy thuộc tính y_ của đĩa (là tọa độ y bắt đầu)
+				this.begin_y = data.diskToPick.y_ 
+				
+				// tính toán số lượng đĩa trong toTower 
+				this.countDisks = data.toTower.arrOfDisk.length 
+				
+				//tạo tọa độ x_ mới là đích cho đĩa
+				this.new_x = this.begin_x + this.distenceBetweenTowers 
+				
+				//tạo tọa độ y_ mới là đích cho đĩa
+				this.new_y = diskLength * diskHeight - (this.countDisks * diskHeight) - this.begin_y 
+				
+				//tạo hướng nhấc đĩa,- là nhấc lên, + là nhậc xuống
+				this.pickUpHeight = -data.diskToPick.height 
+
+				//cập nhật lại đĩa trên mỗi fromTower và toTower 
+				this.update_disk(data.diskToPick, data.fromTower, data.toTower)
+
+				//animation để nhấc đĩa
+				d3.selectAll('.' + data.diskToPick.name)
+					.transition()
+					.delay(i * animationDelay)
+					.duration(animationDuration)
+					.attr('transform', 'translate(' + this.begin_x + ',' + this.pickUpHeight + ')')
+					.transition()
+					.attr('transform', 'translate(' + this.new_x + ',' + this.pickUpHeight + ')')
+					.transition()
+					.attr('transform', 'translate(' + this.new_x + ',' + this.new_y + ')')
+
+				//cập nhật lại tọa độ x_ mới của đĩa sau khi đã di chuyển
+				data.diskToPick.x_ += this.distenceBetweenTowers
+			
+			//bind 'this' to refer 'this' to the property 'data' of 'Game Engine',
+			//or else 'this' will be refered to this.data
+			}.bind(this))
+		}
+}
+
+//thêm game.animateDisk vào cuối,sau khi console.log(data)
+game.animateDisk(numberOfDisk, p.diskHeight, p.animationDelay, p.animationDuration)
+```
+
+### Bước 5: Tạo giao diện cho html mà hoàn thiện
+* đã hoàn thành trong source code.

@@ -20,6 +20,22 @@ class Disk {
 	}
 }
 
+class FlappingBird {
+	constructor(nameBird, d) {
+		this.name = nameBird
+		this.d = d
+	}
+	drawBird(svgInput, imgSource, attrX, attrY, attrWidth, attrHeight, attrClass) {
+		svg.append('image')
+			.attr('href', imgSource)
+			.attr('x', attrX)
+			.attr('y', attrY)
+			.attr('width', attrWidth)
+			.attr('height', attrHeight)
+			.attr('class', attrClass)
+	}
+}
+
 class Tower {
 	constructor(nameTowers, arrDisk) {
 		this.name = nameTowers
@@ -40,7 +56,7 @@ class Tower {
 class GameEngine {
 	constructor() {
 		this.count = 0 //to count the moves
-		this.data = [] //main data,the data  includes all the steps needed to complete the game
+		this.data = [] //main data,the data includes all the steps needed to complete the game
 		this.step = {} //steps which describe the movement of the disks
 	}
 
@@ -83,6 +99,7 @@ class GameEngine {
 
 	//animation method
 	animateDisk(diskLength, diskHeight, animationDelay, animationDuration) {
+		let newDelay = 1000
 		this.data.forEach(function(data, i) {
 				//define new properties for  class GameEngine
 				//distence between the fromTower and the toTower
@@ -98,7 +115,27 @@ class GameEngine {
 				this.update_disk(data.diskToPick, data.fromTower, data.toTower)
 
 				//the actual animation
-				d3.selectAll('.' + data.diskToPick.name)
+				//('.disk1,.sumBird')
+				d3.selectAll('.' + data.diskToPick.name +','+ 'sumBird')
+					.transition()
+					.delay(i * animationDelay)
+					.duration(animationDuration)
+					.attr('transform', 'translate(' + this.begin_x + ',' + this.pickUpHeight + ')')
+					.transition()
+					.attr('transform', 'translate(' + this.new_x + ',' + this.pickUpHeight + ')')
+					.transition()
+					.attr('transform', 'translate(' + this.new_x + ',' + this.new_y + ')')
+
+				// d3.selectAll('.sumBird')
+				// 	.transition()
+				// 	.delay(i * animationDelay)
+				// 	.duration(animationDuration)
+				// 	.attr('transform', 'translate(' + this.begin_x + ',' + this.pickUpHeight + ')')
+				// 	.transition()
+				// 	.attr('transform', 'translate(' + this.new_x + ',' + this.pickUpHeight + ')')
+				// 	.transition()
+				// 	.attr('transform', 'translate(' + this.new_x + ',' + this.new_y + ')')
+				d3.selectAll('.sumBird')
 					.transition()
 					.delay(i * animationDelay)
 					.duration(animationDuration)
@@ -110,21 +147,23 @@ class GameEngine {
 
 				//update the x ordinate of the disks after being moved
 				data.diskToPick.x_ += this.distenceBetweenTowers
+				newDelay+=1000
 			}.bind(this))
-			//bind 'this' to refer the property 'data' of 'Game Engine',or else 'this' will be undefined
+			//bind 'this' to refer to the property 'data' of 'Game Engine',or else 'this' will be undefined
 	}
 }
 
 //the p(properties) of object d3 svg
 const p = {
-	svgWidth: 1200,
+	svgWidth: 1600,
 	svgHieght: 600,
 	diskHeight: 50,
 	disNearestTower: 400,
 	disFurthestTower: 800,
 	towerBuffer: 100,
 	animationDelay: 3000,
-	animationDuration: 1000
+	animationDuration: 1000,
+	birdImage: 'images/bird.gif'
 };
 
 // draw the parent svg
@@ -134,19 +173,20 @@ const svg = d3.select('.container')
 	.attr('height', p.svgHieght)
 
 
-//create the number of disks with the n disks
-let n = 0;
 
-//create the number of towers 
-const m = 3
+//create the number of disks with the n disks and array of disks
+let n;
 let diskArr = []
+
+//create the number of towers and array of towers
+const m = 3
 let towerArr = []
 
 
 //button onclick event to draw the disks and towers
 $('#drawIt').on('click', function() {
 	try {
-		d3.selectAll("svg > *").remove();
+		d3.selectAll("svg > *").remove(); //remove all children of svg,use to redraw
 		n = parseInt($('.inputN').val()) //re-overdrive n
 
 		//reset diskArr and towerArr to prevent mass-clicking the draw button.
@@ -154,9 +194,25 @@ $('#drawIt').on('click', function() {
 		towerArr = []
 
 		//
-		if (0 < n && n < 8 && m === 3) {
+		let bird = new FlappingBird('bird', 1)
 
-			//draw the disks
+		//throw error input n
+		if (n === '') {
+			throw 'Hey,Input !!'
+		}
+		if (isNaN(n)) {
+			throw 'Hey,Input Number !!'
+		}
+		if (n > 7) {
+			throw 'Hey,Too many disks !!'
+		}
+		if (n < 1) {
+			throw 'Hey,Seriously ?'
+		}
+
+		//start drawing
+		if (0 < n && n < 8 && m === 3) {
+			//define and draw the disks
 			for (var j = 1; j <= n; j++) {
 				//define a new Disk
 				diskArr.push(new Disk('disk' + j, j))
@@ -169,13 +225,27 @@ $('#drawIt').on('click', function() {
 					j * p.diskHeight, //.attr('width',
 					p.diskHeight, //.attr('height',
 					'color disk' + j, //.attr('class',
-					0, //diskArr[j - 1].x_
-					j * p.diskHeight, //diskArr[j - 1].y_
-					j * p.diskHeight + p.diskHeight //diskArr[j - 1].height 
+					0, //this.x_
+					j * p.diskHeight, //this.y_
+					j * p.diskHeight + p.diskHeight //this.height 
 				)
+
+				if (j === 1) {
+					bird.drawBird(
+						svg,
+						p.birdImage,
+						(n - j) * p.diskHeight / 2 + p.diskHeight * 2,
+						j * p.diskHeight + 2 * p.diskHeight - 50,
+						100,
+						100,
+						'sumBird'
+					)
+				}
 			}
 
-			//draw the towers
+
+
+			//define and draw the towers
 			for (var j = 1; j <= m; j++) {
 				//define new 3 towers
 				if (j - 1 === 0) {
@@ -183,7 +253,7 @@ $('#drawIt').on('click', function() {
 				} else {
 					towerArr.push(new Tower('tower' + j, [])) //the rest towers dont have any disks 
 				}
-
+				/*
 				//draw those towers
 				towerArr[j - 1].drawTower(
 					svg, //svg argument
@@ -193,17 +263,21 @@ $('#drawIt').on('click', function() {
 					n * p.diskHeight + 150 //attr y2
 				)
 				p.towerBuffer += 400 //increase the bufferzone between towers
+
+				*/
 			}
-			p.towerBuffer = 100
+			p.towerBuffer = 100 //reset the bufferzone between towers when redraw
 				//set random colors for the disks
+
+
 			d3.selectAll('.color').style('fill', function() {
 				return `hsl( ${Math.random() * 360}  ,100%,50%)`
 			});
-		} else {
-			alert('there should be about 1 to 7 disks')
+
+
 		}
-	} catch (e) {
-		console.error(e.message)
+	} catch (err) {
+		alert(err)
 	}
 })
 
@@ -216,9 +290,15 @@ $('#startIt').on('click', function() {
 		console.log(`${game.count} moves`)
 		console.log(game.data)
 
+
+		if (game.count === 0) {
+			alert('Hey,Draw first !!')
+		}
+
 		// start animation
 		game.animateDisk(n, p.diskHeight, p.animationDelay, p.animationDuration)
-	} catch (e) {
-		console.error("__it's not a bug,it's a feature__", e.message)
+		console.log(game.data)
+	} catch (err) {
+		console.error("__Well,it's not a bug,it's a feature__ ,", err.message)
 	}
 })

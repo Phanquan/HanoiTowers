@@ -117,7 +117,7 @@ class GameEngine {
 
 //the p(properties) of object d3 svg
 const p = {
-	svgWidth: 1200,
+	svgWidth: 1600,
 	svgHieght: 600,
 	diskHeight: 50,
 	disNearestTower: 400,
@@ -188,6 +188,8 @@ $('#drawIt').on('click', function() {
 				)
 			}
 
+
+			/*
 			//define and draw the towers
 			for (var j = 1; j <= m; j++) {
 				//define new 3 towers
@@ -209,6 +211,8 @@ $('#drawIt').on('click', function() {
 			}
 			p.towerBuffer = 100 //reset the bufferzone between towers when redraw
 				//set random colors for the disks
+
+			*/
 			d3.selectAll('.color').style('fill', function() {
 				return `hsl( ${Math.random() * 360}  ,100%,50%)`
 			});

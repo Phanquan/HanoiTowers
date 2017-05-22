@@ -227,9 +227,15 @@ $('#startIt').on('click', function() {
 		console.log(`${game.count} moves`)
 		console.log(game.data)
 
+
+		if (game.count === 0) {
+			alert('Hey,Draw first !!')
+		}
+
 		// start animation
 		game.animateDisk(n, p.diskHeight, p.animationDelay, p.animationDuration)
-	} catch (e) {
-		console.error("__Well,it's not a bug,it's a feature__ ,", e.message)
+		console.log(game.data)
+	} catch (err) {
+		console.error("__Well,it's not a bug,it's a feature__ ,", err.message)
 	}
 })
